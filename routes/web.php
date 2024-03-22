@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,9 +14,7 @@ use Inertia\Inertia;
 //    ]);
 //});
 
-Route::get('/', function () {
-    return Inertia::render('Jobs/Index');
-})->name('jobs');
+Route::get('/', [JobsController::class, 'index'])->name('jobs');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
