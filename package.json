@@ -17,5 +17,10 @@
         "vite": "^5.0",
         "vue": "^3.4.0"
     },
-    "dev": "vite --host"
+    "dev": "vite --host",
+    "dependencies": {
+        "datatables.net": "^2.0.3",
+        "datatables.net-dt": "^2.0.3",
+        "datatables.net-vue3": "^3.0.1"
+    }
 }

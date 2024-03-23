@@ -3,14 +3,27 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head} from '@inertiajs/vue3';
 import {onMounted, ref} from 'vue';
 
+import DataTable from 'datatables.net-vue3'
+import DataTablesLib from 'datatables.net';
+
+DataTable.use(DataTablesLib);
+
 const jobs = ref([]);
+
+const columns = [
+    {data: 'title', orderable: false},
+    {data: 'response_count'},
+    {data: 'description', orderable: false},
+    {data: 'user.name', orderable: false},
+    {data: 'published'},
+];
 
 onMounted(() => {
     fetchJobs();
 });
 
 const props = defineProps({
-    fetchJobsUrl: {Type :String, required: true}
+    fetchJobsUrl: {Type: String, required: true}
 })
 
 function fetchJobs() {
@@ -38,7 +51,21 @@ function fetchJobs() {
                                 No jobs found.
                             </div>
 
-                            <table v-if="jobs.length" class="w-full text-sm text-left text-gray-700">
+
+
+                            <DataTable
+                                v-if="jobs.length"
+                                :data="jobs"
+                                :columns="columns"
+                                class="w-full text-sm text-left text-gray-700"
+                                :options="{
+                                    paging: true,
+                                    searching: false,
+                                    info: true,
+                                    lengthChange: false,
+                                    order: []
+                                }"
+                            >
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                                 <tr>
                                     <th scope="col" class="py-3 px-6">
@@ -58,28 +85,8 @@ function fetchJobs() {
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr v-for="job in jobs" class="bg-white border-b">
-                                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                                        {{ job.title }}
-                                    </th>
-                                    <td class="py-4 px-6">
-                                        {{ job.response_count }}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        {{ job.description }}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        {{ job.user.name }}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                       {{ job.published }}
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            </DataTable>
                         </div>
-
                     </div>
                 </div>
             </div>
