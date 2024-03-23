@@ -45,6 +45,9 @@ function fetchJobs() {
                                         Job Vacancy
                                     </th>
                                     <th scope="col" class="py-3 px-6">
+                                        Responses
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
                                         Job Description
                                     </th>
                                     <th scope="col" class="py-3 px-6">
@@ -60,6 +63,9 @@ function fetchJobs() {
                                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
                                         {{ job.title }}
                                     </th>
+                                    <td class="py-4 px-6">
+                                        {{ job.response_count }}
+                                    </td>
                                     <td class="py-4 px-6">
                                         {{ job.description }}
                                     </td>

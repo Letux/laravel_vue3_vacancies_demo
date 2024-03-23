@@ -15,6 +15,7 @@ final class JobVacancyResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'response_count' => $this->response_count,
             'published' => $this->created_at->format('d/m/Y H:i'),
             'user' => new UserResource($this->user),
         ];
