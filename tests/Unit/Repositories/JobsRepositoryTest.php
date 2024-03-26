@@ -76,4 +76,37 @@ final class JobsRepositoryTest extends TestCase
         $this->assertSame($job3->id, $result->first()->id);
         $this->assertSame($job1->id, $result->last()->id);
     }
+
+    #[Test]
+    public function count_24_hours()
+    {
+        $user = User::factory()->create();
+
+        JobVacancy::factory()->create(['user_id' => $user->id, 'created_at' => now()->subDay()->subHour()]);
+        JobVacancy::factory()->create(['user_id' => $user->id, 'created_at' => now()]);
+
+        $result = $this->repository->count24hours($user->id);
+
+        $this->assertSame(1, $result);
+    }
+
+    #[Test]
+    public function create()
+    {
+        $user = User::factory()->create();
+
+        $result = JobVacancy::get();
+        $this->assertCount(0, $result);
+
+        $result = $this->repository->create('title', 'description', $user->id);
+
+        $this->assertTrue($result instanceof JobVacancy);
+        $this->assertSame('title', $result->title);
+        $this->assertSame('description', $result->description);
+        $this->assertSame($user->id, $result->user_id);
+
+        $result1 = JobVacancy::get();
+        $this->assertCount(1, $result1);
+        $this->assertSame($result->id, $result1->first()->id);
+    }
 }

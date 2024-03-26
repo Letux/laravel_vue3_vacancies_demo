@@ -19,6 +19,7 @@ final class JobServiceTest extends TestCase
 
     protected JobsService $service;
 
+    #[\Override]
     protected function setUp() : void
     {
         parent::setUp();
