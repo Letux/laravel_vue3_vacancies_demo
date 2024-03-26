@@ -19,6 +19,7 @@
     },
     "dev": "vite --host",
     "dependencies": {
+        "@vuepic/vue-datepicker": "^8.3.1",
         "datatables.net": "^2.0.3",
         "datatables.net-dt": "^2.0.3",
         "datatables.net-vue3": "^3.0.1"
