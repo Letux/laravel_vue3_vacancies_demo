@@ -157,6 +157,8 @@ const showingNavigationDropdown = ref(false);
             <!-- Page Heading -->
             <header class="bg-white shadow" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div v-if="$page.props.flash.message" id="error_messages" class="text-orange-700 mb-4">{{ $page.props.flash.message}}</div>
+
                     <slot name="header" />
                 </div>
             </header>

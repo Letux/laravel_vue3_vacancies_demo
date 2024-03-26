@@ -31,4 +31,21 @@ final readonly class JobsRepository
             ->with('user')
             ->get();
     }
+
+    public function count24hours(int $userId): int
+    {
+        return JobVacancy
+            ::where('user_id', $userId)
+            ->where('created_at', '>=', now()->subDay())
+            ->count();
+    }
+
+    public function create(string $title, string $description, int $userId): JobVacancy
+    {
+        return JobVacancy::create([
+            'title' => $title,
+            'description' => $description,
+            'user_id' => $userId,
+        ]);
+    }
 }
