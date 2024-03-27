@@ -26,6 +26,7 @@ Route::middleware('auth')
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+        // Jobs
         Route::get('/jobs/add', [JobsController::class, 'create'])->name('jobs.create');
         Route::post('/jobs', [JobsController::class, 'store'])->name('jobs.store');
     });
