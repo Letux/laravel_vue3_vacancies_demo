@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Enums\SortOrder;
 use App\Models\JobVacancy;
+use App\Models\JobVacancyResponse;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 
@@ -47,5 +48,10 @@ final readonly class JobsRepository
             'description' => $description,
             'user_id' => $userId,
         ]);
+    }
+
+    public function apply(JobVacancy $job, int $userId): JobVacancyResponse
+    {
+        return $job->responses()->create(['user_id' => $userId, 'job_vacancy_id' => $job->id]);
     }
 }

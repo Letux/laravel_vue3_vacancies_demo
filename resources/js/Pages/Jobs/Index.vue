@@ -15,7 +15,14 @@ const jobs = ref([]);
 const date = ref();
 
 const columns = [
-    {data: 'title', orderable: false},
+    {
+        data: 'title',
+        orderable: false,
+        render: function(data, type, row) {
+            let job_route = route('jobs.show', row.id);
+            return `<a href="${job_route}" class="underline">${data}</a>`;
+        }
+    },
     {data: 'response_count'},
     {data: 'description', orderable: false},
     {data: 'user.name', orderable: false},

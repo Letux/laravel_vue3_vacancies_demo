@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DTOs\CreateJobDTO;
+use App\Models\JobVacancy;
 use App\Services\JobsService;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -46,9 +47,10 @@ final class JobsController extends Controller
         return $jobsService->create($dto, auth()->id());
     }
 
-//    public function show($id)
-//    {
-//    }
+    public function show(JobVacancy $job)
+    {
+        return Inertia::render('Jobs/Show', ['job' => $job]);
+    }
 //
 //    public function edit($id)
 //    {

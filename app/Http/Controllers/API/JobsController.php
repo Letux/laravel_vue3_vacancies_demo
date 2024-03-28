@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\DTOs\JobsListDTO;
 use App\Http\Controllers\Controller;
+use App\Models\JobVacancy;
 use App\Services\JobsService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 final class JobsController extends Controller
@@ -12,6 +14,11 @@ final class JobsController extends Controller
     public function index(JobsListDTO $dto, JobsService $service): AnonymousResourceCollection
     {
         return $service->list($dto);
+    }
+
+    public function apply(JobVacancy $job, JobsService $service): JsonResponse
+    {
+        return $service->apply($job, auth()->id());
     }
 
 //    public function create()

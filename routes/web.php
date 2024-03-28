@@ -31,5 +31,6 @@ Route::middleware('auth')
         Route::post('/jobs', [JobsController::class, 'store'])->name('jobs.store');
     });
 
+Route::get('/jobs/{job}', [JobsController::class, 'show'])->name('jobs.show');
 
 require __DIR__ . '/auth.php';

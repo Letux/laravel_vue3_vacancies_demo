@@ -5,26 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class JobVacancy extends Model
+class JobVacancyResponse extends Model
 {
-    use SoftDeletes, HasFactory;
+    use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
+        'job_vacancy_id',
         'user_id',
     ];
+
+//    public function jobVacancy()
+//    {
+//        return $this->belongsTo(JobVacancy::class);
+//    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function responses(): HasMany
-    {
-        return $this->hasMany(JobVacancyResponse::class);
     }
 }
